@@ -21,5 +21,9 @@
   "homepage": "https://github.com/DevRob/simple-webserver#readme",
   "devDependencies": {
     "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "axios": "^0.15.3",
+    "lodash": "^4.17.2"
   }
 }

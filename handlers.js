@@ -1,5 +1,6 @@
 const axios = require("axios");
 const _ = require('lodash');
+const fs = require('fs');
 exports.homepage = function(req, res) {
   res.setHeader("Content-Type", "text/html");
   res.end("<h2>Hi There,</h2>");
@@ -30,7 +31,6 @@ exports.ipinfo = function(req, res) {
         country = api_result.data["country_name"],
         city = api_result.data["city"];
 
-    console.log(ip);
     res.setHeader("Content-Type", "text/html");
     res.end("<div>" +
       "<h2>Visiting from: " + country + "</h2>" +
@@ -40,8 +40,19 @@ exports.ipinfo = function(req, res) {
         "<li>city: " + city + "</li>" +
       "<ul/>" +
     "</div>");
+    logIp(api_result.data);
   })
   .catch((error) => {
     console.log(error);
   });
+}
+
+function logIp(json_res) {
+  fs.writeFile("./log.txt", JSON.stringify(json_res) + "\n", function(err) {
+    if(err) {
+        return console.log(err);
+    }
+
+    console.log("Log entered for request from: ", json_res["ip"]);
+});
 }

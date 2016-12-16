@@ -48,7 +48,7 @@ exports.ipinfo = function(req, res) {
 }
 
 function logIp(json_res) {
-  fs.writeFile("./log.txt", JSON.stringify(json_res) + "\n", function(err) {
+  fs.appendFile("./log.txt", JSON.stringify(json_res) + "\n", function(err) {
     if(err) {
         return console.log(err);
     }
